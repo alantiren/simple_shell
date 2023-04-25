@@ -9,6 +9,7 @@
 #include <string.h>
 #include <unistd.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -292,5 +293,7 @@ size_t print_list(const list_t *);
 list_t *node_starts_with(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
 >>>>>>> df5c5cc983fe044977825dc383547c146d40c160
+=======
+>>>>>>> 6916ccac52e7f42fc68ed55a668c338dc225c4e1
 
 #endif /* _HEADERS_H_ */
