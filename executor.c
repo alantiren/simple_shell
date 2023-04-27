@@ -48,12 +48,12 @@ int _exetor(char **arr, const char *throgh, int s)
 }
 
 /**
- * execute - execute the given command
+ * execut - execute the given command
  * @command: the command to execute
  *
  * Return: On success, returns 0. On failure, returns 1.
  */
-int execute(char *command)
+int execut(char *command)
 {
 pid_t pid;
 int status;
