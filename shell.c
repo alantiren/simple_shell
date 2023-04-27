@@ -8,15 +8,6 @@
 #define MAX_ARGUMENTS 10
 #define MAX_ARGUMENT_LENGTH 50
 
-/**
- * main - Entry point.
- * Description: Program to interpret adn execute programs defined of the $PATH.
- * @argc: Number of Arguments.
- * @argv: Array of arguments.
- * @env_point: environment of the executed current program.
- * Return: (EXIT)
- */
-
 int main(int argc, char **argv, char **env_point)
 {
 char *ln = NULL, **arr, *_exit = "exit";
@@ -27,6 +18,7 @@ signal(SIGINT, SIG_IGN);
 UNUSED(argc);
 UNUSED(argv);
 write(1, "cisfun$ ", 9);
+
 while ((rc = getline(&ln, &lenth, stdin)) != EOF)
 {
 if (ln && (str_cmp(ln, _exit)) != 0)
@@ -54,42 +46,50 @@ perror("Error, unable to allocate buffer\n");
 }
 free(ln);
 exit(EXIT_SUCCESS);
+}
+
+int shell_loop(void)
 {
 int should_run = 1;
+char line[MAX_COMMAND_LENGTH];
 pid_t pid;
+
 while (should_run)
 {
 printf("simple_shell$ ");
 fflush(stdout);
-if
-(fgets(line, MAX_LINE_LENGTH, stdin) == NULL)
-(feof(stdin))
+if (fgets(line, MAX_COMMAND_LENGTH, stdin) == NULL || feof(stdin))
 {
 printf("\n");
 return (EXIT_SUCCESS);
 }
 else
+{
 perror("fgets");
 return (EXIT_FAILURE);
+}
 line[strcspn(line, "\n")] = '\0';
 pid = fork();
 if (pid < 0)
+{
 perror("fork");
 return (EXIT_FAILURE);
-else if
-(pid == 0)
-if
-(execve(line, argv, env_point) == -1)
-(errno == ENOENT)
+}
+else if (pid == 0)
+{
+if (execve(line, argv, env_point) == -1)
+{
+if (errno == ENOENT)
 printf("%s: command not found\n", line);
 else if (errno == EACCES)
 printf("%s: permission denied\n", line);
 else
 perror("execve");
 exit(EXIT_FAILURE);
+}
+}
 else
 wait(NULL);
 }
 return (EXIT_SUCCESS);
-}
 }
