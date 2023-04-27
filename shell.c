@@ -56,39 +56,3 @@ int main(int argc, char **argv, char **env_point)
 	free(ln);
 	exit(EXIT_SUCCESS);
 }
-
-#define MAX_COMMAND_LENGTH 1024
-#define PROMPT "> "
-
-int main() {
-  char command[MAX_COMMAND_LENGTH];
-  while (1) {
-    printf(PROMPT);
-    fflush(stdout); // Make sure the prompt is displayed before reading input
-    if (fgets(command, MAX_COMMAND_LENGTH, stdin) == NULL) {
-      printf("\n"); // Print a newline if Ctrl+D was pressed
-      break;
-    }
-    size_t command_length = strlen(command);
-    if (command[command_length - 1] == '\n') {
-      command[command_length - 1] = '\0'; // Remove the newline
-    }
-    pid_t child_pid = fork();
-    if (child_pid == -1) {
-      perror("fork");
-      exit(EXIT_FAILURE);
-    } else if (child_pid == 0) {
-      char* args[] = {command, NULL};
-      execve(command, args, environ);
-      perror("execve"); // If execve returns, it failed
-      exit(EXIT_FAILURE);
-    } else {
-      int status;
-      if (waitpid(child_pid, &status, 0) == -1) {
-        perror("waitpid");
-        exit(EXIT_FAILURE);
-      }
-    }
-  }
-  return 0;
-}
