@@ -58,8 +58,6 @@ exit(EXIT_SUCCESS);
 /**
  * shell_loop - loop that repeatedly prompts the user.
  * Description: contains a loop
- * @argv: Array of arguments.
- * @env_point: environment of the executed current program.
  * Return: (EXIT_SUCCESS) encountered an end-of-file (EOF) condition.
  *         (EXIT_FAILURE) encountered an error.
  */
