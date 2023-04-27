@@ -64,23 +64,24 @@ char line[MAX_LINE_LENGTH];
 int should_run = 1;
 pid_t pid;
 
-while (should_run) {
+while (should_run) 
+{
 printf("simple_shell$ ");
 fflush(stdout);
-
-if (fgets(line, MAX_LINE_LENGTH, stdin) == NULL) {
-if (feof(stdin)) {
+if (fgets(line, MAX_LINE_LENGTH, stdin) == NULL) 
+{
+if (feof(stdin)) 
+{
 printf("\n");
 return EXIT_SUCCESS;
-} else 
+} 
+else 
 {
 perror("fgets");
 return EXIT_FAILURE;
 }
 }
-// remove trailing newline
 line[strcspn(line, "\n")] = '\0';
-// fork a new process
 pid = fork();
 if (pid < 0) 
 {
@@ -89,8 +90,9 @@ return EXIT_FAILURE;
 } 
 else if (pid == 0) 
 {
-// child process
-if (execve(line, argv, env_point) == -1) {
+if 
+(execve(line, argv, env_point) == -1) 
+{
 if (errno == ENOENT) 
 {
 printf("%s: command not found\n", line);
@@ -105,8 +107,7 @@ exit(EXIT_FAILURE);
 }
 } else 
 {
-// parent process
-wait(NULL); // wait for child to terminate
+wait(NULL); 
 }
 }
 return EXIT_SUCCESS;
