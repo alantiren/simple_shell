@@ -23,7 +23,7 @@ perror("read_input");
 exit(EXIT_FAILURE);
 }
 }
-return buffer;
+return (buffer);
 }
 
 /**
@@ -37,5 +37,5 @@ char *strip_newline(char *str)
 size_t len = str_len(str);
 if (len > 0 && str[len - 1] == '\n')
 str[len - 1] = '\0';
-return str;
+return (str);
 }
