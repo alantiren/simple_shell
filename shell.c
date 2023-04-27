@@ -84,7 +84,7 @@ else
 perror("fgets");
 return (EXIT_FAILURE);
 }
-line[strcspn(line, "\n")] = '\0';
+line[_strspn(line, "\n")] = '\0';
 pid = fork();
 if (pid < 0)
 {
