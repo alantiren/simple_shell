@@ -54,7 +54,7 @@ free(ln);
 exit(EXIT_SUCCESS);
 }
 
-int main(int argc, char *argv[], char *env_point[])
+int main(void)
 {
 char line[MAX_LINE_LENGTH];
 int should_run = 1;
