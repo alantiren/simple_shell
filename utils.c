@@ -5,8 +5,9 @@
 /**
 * is_valid_executable - function prototype
 * access - system call to check
+* filename - exists and is executable by the user
 * Description - checks if a string represents valid executable file
-* Returns : true. Otherwise, it returns false
+* Return : (true) Otherwise, it returns (false)
 **/
 
 bool is_valid_executable(const char *filename)
