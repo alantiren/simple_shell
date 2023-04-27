@@ -58,6 +58,8 @@ exit(EXIT_SUCCESS);
 /**
  * shell_loop - loop that repeatedly prompts the user.
  * Description: contains a loop
+ * @argv: Array of arguments.
+ * @env_point: environment of the executed current program.
  * Return: (EXIT_SUCCESS) encountered an end-of-file (EOF) condition.
  *         (EXIT_FAILURE) encountered an error.
  */
@@ -90,6 +92,7 @@ return (EXIT_FAILURE);
 else if (pid == 0)
 {
 if (execve(line, argv, env_point) == -1)
+{
 if (errno == ENOENT)
 printf("%s: command not found\n", line);
 else if (errno == EACCES)
@@ -97,6 +100,7 @@ printf("%s: permission denied\n", line);
 else
 perror("execve");
 exit(EXIT_FAILURE);
+}
 }
 else
 wait(NULL);
