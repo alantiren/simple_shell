@@ -65,12 +65,11 @@ int shell_loop(void)
 int should_run = 1;
 char line[MAX_COMMAND_LENGTH];
 pid_t pid;
-{
 char *argv[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
 execve("/bin/ls", argv, env_point);
 return (0);
-}
+
 while (should_run)
 {
 printf("simple_shell$ ");
