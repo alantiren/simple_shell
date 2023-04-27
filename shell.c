@@ -66,7 +66,7 @@ while (should_run)
 {
 printf("simple_shell$ ");
 fflush(stdout);
-if 
+if
 (fgets(line, MAX_LINE_LENGTH, stdin) == NULL)
 (feof(stdin))
 {
@@ -81,7 +81,7 @@ pid = fork();
 if (pid < 0)
 perror("fork");
 return (EXIT_FAILURE);
-else if 
+else if
 (pid == 0)
 if
 (execve(line, argv, env_point) == -1)
