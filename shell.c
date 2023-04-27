@@ -17,16 +17,13 @@
 
 int main(int argc, char **argv, char **env_point)
 {
-{
 char *ln = NULL, **arr, *_exit = "exit";
 size_t lenth = 0;
 ssize_t rc;
 int strc = 0, wstatus = 0;
-
 signal(SIGINT, SIG_IGN);
 UNUSED(argc);
 UNUSED(argv);
-
 write(1, "cisfun$ ", 9);
 while ((rc = getline(&ln, &lenth, stdin)) != EOF)
 {
@@ -56,6 +53,8 @@ perror("Error, unable to allocate buffer\n");
 free(ln);
 exit(EXIT_SUCCESS);
 }
+
+int main(int argc, char *argv[], char *env_point[])
 {
 char line[MAX_LINE_LENGTH];
 int should_run = 1;
@@ -94,5 +93,4 @@ else
 wait(NULL);
 }
 return (EXIT_SUCCESS);
-}
 }
