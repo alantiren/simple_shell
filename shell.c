@@ -8,6 +8,15 @@
 #define MAX_ARGUMENTS 10
 #define MAX_ARGUMENT_LENGTH 50
 
+/**
+ * main - Entry point.
+ * Description: Program to interpret adn execute programs defined of the $PATH.
+ * @argc: Number of Arguments.
+ * @argv: Array of arguments.
+ * @env_point: environment of the executed current program.
+ * Return: (EXIT)
+ */
+
 int main(int argc, char **argv, char **env_point)
 {
 char *ln = NULL, **arr, *_exit = "exit";
@@ -18,7 +27,6 @@ signal(SIGINT, SIG_IGN);
 UNUSED(argc);
 UNUSED(argv);
 write(1, "cisfun$ ", 9);
-
 while ((rc = getline(&ln, &lenth, stdin)) != EOF)
 {
 if (ln && (str_cmp(ln, _exit)) != 0)
@@ -47,13 +55,20 @@ perror("Error, unable to allocate buffer\n");
 free(ln);
 exit(EXIT_SUCCESS);
 }
-
+/**
+ * shell_loop -  loop that repeatedly prompts the user to enter a command and then executes that command.
+ * Description: t contains a loop that repeatedly prompts the user to enter a command and then executes that command.
+ * @should_run: an integer variable used to control the loop.
+ * @line: a character array used to store the user's input.
+ * @pid: a process ID variable used to store the return value of fork().
+ * Return: (EXIT_SUCCESS) encountered an end-of-file (EOF) condition, indicating that the user has closed the standard input stream. If so, print a newline character and return EXIT_SUCCESS to exit the loop and the function.
+ *         (EXIT_FAILURE) encountered an error, print an error message and return EXIT_FAILURE to exit the loop and the function.
+ */
 int shell_loop(void)
 {
 int should_run = 1;
 char line[MAX_COMMAND_LENGTH];
 pid_t pid;
-
 while (should_run)
 {
 printf("simple_shell$ ");
