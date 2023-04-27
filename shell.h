@@ -25,8 +25,6 @@ void _path(char **arr, int s, char **_enviro, int *wstatus);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 int execute(char **args, char **front);
 int shell_loop(void);
-char *read_input(void)
-char *strip_newline(char *str)
 
 /*   Generic functions. */
 
@@ -37,6 +35,8 @@ char *str_cat(char *after, char *src);
 char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
 int _strncmp(const char *s1, const char *s2, size_t n);
+char *read_input(void)
+char *strip_newline(char *str)
 
 #include <string.h>
 #include <sys/types.h>

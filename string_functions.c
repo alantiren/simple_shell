@@ -34,7 +34,7 @@ return (buffer);
  */
 char *strip_newline(char *str)
 {
-size_t len = str_len(str);
+size_t len = strlen(str);
 if (len > 0 && str[len - 1] == '\n')
 str[len - 1] = '\0';
 return (str);
