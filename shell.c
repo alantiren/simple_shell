@@ -69,7 +69,7 @@ pid_t pid;
 char *argv[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
 execve("/bin/ls", argv, env_point)
-return 0;
+return (0);
 }
 while (should_run)
 {
