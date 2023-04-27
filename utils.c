@@ -2,9 +2,10 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-/* is_valid_executable - function prototype
+/**
+* @is_valid_executable - function prototype
 * @access - system call to check
-* Function for checking if a string represents a valid executable file
+* Description - Function for checking if a string represents a valid executable file
 * Returns : true. Otherwise, it returns false
 **/
 
