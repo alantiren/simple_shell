@@ -29,7 +29,7 @@ void _path(char **arr, int s, char **_enviro, int *wstatus);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 int execute(char **args, char **front);
 int shell_loop(void);
-bool is_valid_executable(const char *filename);
+void execute_command(char* command)
 
 /*   Generic functions. */
 
