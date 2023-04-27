@@ -58,16 +58,19 @@ exit(EXIT_SUCCESS);
 /**
  * shell_loop - loop that repeatedly prompts the user.
  * Description: contains a loop
- * Return: (EXIT_SUCCESS) encountered an end-of-file (EOF) condition.
- *         (EXIT_FAILURE) encountered an error.
+ * Return: (EXIT_SUCCESS) on success, (EXIT_FAILURE) on success.
  */
 int shell_loop(void)
 {
 int should_run = 1;
 char line[MAX_COMMAND_LENGTH];
 pid_t pid;
-char *argv[] = { "/bin/ls", "-l", NULL };
+{
+char *args[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
+execve("/bin/ls", args, env)
+return 0;
+}
 while (should_run)
 {
 printf("simple_shell$ ");
@@ -82,7 +85,7 @@ else
 perror("fgets");
 return (EXIT_FAILURE);
 }
-line[strcspn(line, "\n")] = '\0';
+line[_strcspn(line, "\n")] = '\0';
 pid = fork();
 if (pid < 0)
 {
@@ -91,7 +94,7 @@ return (EXIT_FAILURE);
 }
 else if (pid == 0)
 {
-if (execve(line, argv, env_point) == -1)
+if (execve(line, args, env_point) == -1)
 {
 if (errno == ENOENT)
 printf("%s: command not found\n", line);
