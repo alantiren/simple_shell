@@ -24,6 +24,8 @@ void liberay_p(char **arr, int s);
 void _path(char **arr, int s, char **_enviro, int *wstatus);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 int execute(char **args, char **front);
+int shell_loop(void);
+
 /*   Generic functions. */
 
 char *str_cpy(char *after, char *src, int n);
