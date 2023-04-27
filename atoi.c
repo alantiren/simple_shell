@@ -6,7 +6,7 @@
  */
 int _isdigit(int c)
 {
-    return (c >= '0' && c <= '9');
+return (c >= '0' && c <= '9');
 }
 
 /**
@@ -17,8 +17,8 @@ int _isdigit(int c)
  */
 int _isspace(int c)
 {
-    return (c == ' ' || c == '\t' || c == '\n' ||
-            c == '\r' || c == '\v' || c == '\f');
+return (c == ' ' || c == '\t' || c == '\n' ||
+c == '\r' || c == '\v' || c == '\f');
 }
 
 /**
@@ -29,24 +29,20 @@ int _isspace(int c)
  */
 int _atoi(char *s)
 {
-    int result = 0;
-    int sign = 1;
-
-    if (*s == '-') {
-        sign = -1;
-        s++;
-    }
-
-    while (*s) {
-        if (!_isdigit(*s)) {
-            /* if the character is not a digit, break the loop */
-            break;
-        }
-
-        int digit = *s - '0';
-        result = result * 10 + digit;
-        s++;
-    }
-
-    return sign * result;
+int result = 0;
+int sign = 1;
+if (*s == '-') {
+sign = -1;
+s++;
+}
+while (*s) {
+if (!_isdigit(*s)) {
+/* if the character is not a digit, break the loop */
+ break;
+}
+int digit = *s - '0';
+result = result * 10 + digit;
+s++;
+}
+return sign * result;
 }
