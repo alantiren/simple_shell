@@ -66,9 +66,9 @@ int should_run = 1;
 char line[MAX_COMMAND_LENGTH];
 pid_t pid;
 {
-char *args[] = { "/bin/ls", "-l", NULL };
+char *argv[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
-execve("/bin/ls", args, env)
+execve("/bin/ls", argv, env_point)
 return 0;
 }
 while (should_run)
@@ -94,7 +94,7 @@ return (EXIT_FAILURE);
 }
 else if (pid == 0)
 {
-if (execve(line, args, env_point) == -1)
+if (execve(line, argv, env_point) == -1)
 {
 if (errno == ENOENT)
 printf("%s: command not found\n", line);
