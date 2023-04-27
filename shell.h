@@ -61,4 +61,7 @@ int _strncmp(const char *s1, const char *s2, size_t n);
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
+/* Macro for checking if a string is empty or not */ 
+#define is_empty_string(s) ((s)[0] == '\0')
+
 #endif
