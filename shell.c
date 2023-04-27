@@ -58,9 +58,8 @@ exit(EXIT_SUCCESS);
 /**
  * shell_loop - loop that repeatedly prompts the user.
  * Description: contains a loop
- * Return: (EXIT_SUCCESS) encountered an end-of-file (EOF) condition, indicating that the user has closed the standard input stream. 
- *                        If so, print a nto exit the loop and the function.
- *         (EXIT_FAILURE) encountered an error, print an error message and return EXIT_FAILURE to exit 
+ * Return: (EXIT_SUCCESS) encountered an end-of-file (EOF) condition.
+ *         (EXIT_FAILURE) encountered an error.
  */
 int shell_loop(void)
 {
