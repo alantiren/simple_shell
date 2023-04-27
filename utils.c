@@ -4,7 +4,7 @@
 
 /**
 * is_valid_executable - function prototype
-* access - system call to check
+* @access - system call to check
 * filename - exists and is executable by the user
 * Description - checks if a string represents valid executable file
 * Return : (true) Otherwise, it returns (false)
