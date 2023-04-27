@@ -45,8 +45,6 @@ int _strncmp(const char *s1, const char *s2, size_t n);
 #include <limits.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <time.h>
-
 
 /* for read/write buffers */
 #define READ_BUF_SIZE 1024
