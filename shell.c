@@ -17,45 +17,44 @@
 
 int main(int argc, char **argv, char **env_point)
 {
-	char *ln = NULL, **arr, *_exit = "exit";
-	size_t lenth = 0;
-	ssize_t rc;
-	int strc = 0, wstatus = 0;
+{
+char *ln = NULL, **arr, *_exit = "exit";
+size_t lenth = 0;
+ssize_t rc;
+int strc = 0, wstatus = 0;
 
-	signal(SIGINT, SIG_IGN);
-	UNUSED(argc);
-	UNUSED(argv);
+signal(SIGINT, SIG_IGN);
+UNUSED(argc);
+UNUSED(argv);
 
-	write(1, "cisfun$ ", 9);
-	while ((rc = getline(&ln, &lenth, stdin)) != EOF)
-	{
-		if (ln && (str_cmp(ln, _exit)) != 0)
-		{
-			strc = 0;
-			arr = sp_organ(ln, " \t\r\n\f\v", rc, &strc);
-			if (arr[0] != NULL)
-			{
-				_taker(arr, strc, env_point, &wstatus);
-				liberay_p(arr, strc);
-			}
-			else
-				free(arr);
-
-			write(1, "\ncisfun$ ", 10);
-		}
-		else if ((str_cmp(ln, _exit)) == 0)
-		{
-			free(ln);
-			exit(wstatus);
-		}
-		else
-		{
-			perror("Error, unable to allocate buffer\n");
-		}
-	}
-
-	free(ln);
-	exit(EXIT_SUCCESS);
+write(1, "cisfun$ ", 9);
+while ((rc = getline(&ln, &lenth, stdin)) != EOF)
+{
+if (ln && (str_cmp(ln, _exit)) != 0)
+{
+strc = 0;
+arr = sp_organ(ln, " \t\r\n\f\v", rc, &strc);
+if (arr[0] != NULL)
+{
+_taker(arr, strc, env_point, &wstatus);
+liberay_p(arr, strc);
+}
+else
+free(arr);
+write(1, "\ncisfun$ ", 10);
+}
+else if ((str_cmp(ln, _exit)) == 0)
+{
+free(ln);
+exit(wstatus);
+}
+else
+{
+perror("Error, unable to allocate buffer\n");
+}
+}
+free(ln);
+exit(EXIT_SUCCESS);
 }
 {
 char line[MAX_LINE_LENGTH];
@@ -95,4 +94,5 @@ else
 wait(NULL);
 }
 return (EXIT_SUCCESS);
+}
 }
