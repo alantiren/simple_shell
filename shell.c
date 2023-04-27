@@ -4,7 +4,6 @@
 #include "shell.h"
 
 #define UNUSED(x) (void)(x)
-#define MAX_LINE_LENGTH 100
 
 /**
  * main - Entry point.
@@ -52,11 +51,7 @@ perror("Error, unable to allocate buffer\n");
 }
 free(ln);
 exit(EXIT_SUCCESS);
-}
-
-int main(void)
 {
-char line[MAX_LINE_LENGTH];
 int should_run = 1;
 pid_t pid;
 while (should_run)
@@ -93,4 +88,5 @@ else
 wait(NULL);
 }
 return (EXIT_SUCCESS);
+}
 }
