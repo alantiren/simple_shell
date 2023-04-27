@@ -3,9 +3,9 @@
 #include <stdbool.h>
 
 /**
-* @is_valid_executable - function prototype
-* @access - system call to check
-* Description - Function for checking if a string represents a valid executable file
+* is_valid_executable - function prototype
+* access - system call to check
+* Description - checks if a string represents valid executable file
 * Returns : true. Otherwise, it returns false
 **/
 
