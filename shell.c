@@ -56,7 +56,6 @@ int main(int argc, char **argv, char **env_point)
 	free(ln);
 	exit(EXIT_SUCCESS);
 }
-
 #define MAX_LINE_LENGTH 100
 {
 char line[MAX_LINE_LENGTH];
