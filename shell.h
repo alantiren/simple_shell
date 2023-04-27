@@ -8,10 +8,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <limits.h>
 #include <fcntl.h>
+#include <stdbool.h>
+
+
 
 /*   Our functions. */
 
@@ -25,7 +29,7 @@ void _path(char **arr, int s, char **_enviro, int *wstatus);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 int execute(char **args, char **front);
 int shell_loop(void);
-
+bool is_valid_executable(const char *filename);
 
 /*   Generic functions. */
 
@@ -36,15 +40,6 @@ char *str_cat(char *after, char *src);
 char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
 int _strncmp(const char *s1, const char *s2, size_t n);
-
-
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <limits.h>
-#include <fcntl.h>
-#include <errno.h>
 
 /* for read/write buffers */
 #define READ_BUF_SIZE 1024
