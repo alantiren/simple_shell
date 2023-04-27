@@ -56,3 +56,58 @@ int main(int argc, char **argv, char **env_point)
 	free(ln);
 	exit(EXIT_SUCCESS);
 }
+
+#define MAX_LINE_LENGTH 100
+
+int main(int argc, char **argv, char **env_point)
+{
+char line[MAX_LINE_LENGTH];
+int should_run = 1;
+pid_t pid;
+
+while (should_run) {
+printf("simple_shell$ ");
+fflush(stdout);
+
+if (fgets(line, MAX_LINE_LENGTH, stdin) == NULL) {
+if (feof(stdin)) {
+printf("\n"); // end of file condition (Ctrl+D)
+return EXIT_SUCCESS;
+} else 
+{
+perror("fgets");
+return EXIT_FAILURE;
+}
+}
+// remove trailing newline
+line[strcspn(line, "\n")] = '\0';
+// fork a new process
+pid = fork();
+if (pid < 0) 
+{
+perror("fork");
+return EXIT_FAILURE;
+} 
+else if (pid == 0) 
+{
+// child process
+if (execve(line, argv, envp) == -1) {
+if (errno == ENOENT) {
+printf("%s: command not found\n", line);
+} else if (errno == EACCES) 
+{
+printf("%s: permission denied\n", line);
+} else 
+{
+perror("execve");
+}
+exit(EXIT_FAILURE);
+}
+} else 
+{
+// parent process
+wait(NULL); // wait for child to terminate
+}
+}
+return EXIT_SUCCESS;
+}
