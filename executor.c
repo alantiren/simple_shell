@@ -81,7 +81,8 @@ perror("waitpid");
 return (1);
 }
 {
-while (!WIFEXITED(status) && !WIFSIGNALED(status));
+while
+(!WIFEXITED(status) && !WIFSIGNALED(status));
 }
 }
 return (0);
