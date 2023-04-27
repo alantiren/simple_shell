@@ -64,51 +64,54 @@ char line[MAX_LINE_LENGTH];
 int should_run = 1;
 pid_t pid;
 
-while (should_run) 
+while (should_run)
 {
 printf("simple_shell$ ");
 fflush(stdout);
-if (fgets(line, MAX_LINE_LENGTH, stdin) == NULL) 
+if (fgets(line, MAX_LINE_LENGTH, stdin) == NULL)
 {
-if (feof(stdin)) 
+if (feof(stdin))
 {
 printf("\n");
-return EXIT_SUCCESS;
-} 
-else 
+return (EXIT_SUCCESS);
+}
+else
 {
 perror("fgets");
-return EXIT_FAILURE;
+return (EXIT_FAILURE);
 }
 }
 line[strcspn(line, "\n")] = '\0';
 pid = fork();
-if (pid < 0) 
+if (pid < 0)
 {
 perror("fork");
 return EXIT_FAILURE;
-} 
-else if (pid == 0) 
+}
+else if (pid == 0)
 {
-if 
-(execve(line, argv, env_point) == -1) 
+if
+(execve(line, argv, env_point) == -1)
 {
-if (errno == ENOENT) 
+if (errno == ENOENT)
 {
 printf("%s: command not found\n", line);
-} else if (errno == EACCES) 
+}
+else if (errno == EACCES)
 {
 printf("%s: permission denied\n", line);
-} else 
+}
+else
 {
 perror("execve");
 }
 exit(EXIT_FAILURE);
 }
-} else 
+}
+else
 {
-wait(NULL); 
+wait(NULL);
 }
 }
-return EXIT_SUCCESS;
+return (EXIT_SUCCESS);
 }
