@@ -59,7 +59,6 @@ int main(int argc, char **argv, char **env_point)
 
 #define MAX_LINE_LENGTH 100
 
-int main(int argc, char **argv, char **env_point)
 {
 char line[MAX_LINE_LENGTH];
 int should_run = 1;
@@ -71,7 +70,7 @@ fflush(stdout);
 
 if (fgets(line, MAX_LINE_LENGTH, stdin) == NULL) {
 if (feof(stdin)) {
-printf("\n"); // end of file condition (Ctrl+D)
+printf("\n");
 return EXIT_SUCCESS;
 } else 
 {
@@ -91,8 +90,9 @@ return EXIT_FAILURE;
 else if (pid == 0) 
 {
 // child process
-if (execve(line, argv, envp) == -1) {
-if (errno == ENOENT) {
+if (execve(line, argv, env_point) == -1) {
+if (errno == ENOENT) 
+{
 printf("%s: command not found\n", line);
 } else if (errno == EACCES) 
 {
