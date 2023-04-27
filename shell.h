@@ -64,37 +64,4 @@ int _strncmp(const char *s1, const char *s2, size_t n);
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
-/* Handle errors */
-void print_error(char *message, int exit_status);
-
-/* Set and unset environment variables */
-int set_env(char *name, char *value);
-int unset_env(char *name);
-
-/* Handle commands with arguments, separator, logical operators */
-int handle_commands(char *input);
-
-/* Variables handling */
-void handle_variables(char **args);
-char **parse_cmd(char *cmd);
-char *replace_vars(char *str);
-char *handle_var(char *str);
-
-/* getline implementation */
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
-
-/* String manipulation */
-char *strip(char *str);
-char **split(char *str, const char *delim);
-int _atoi(char *s);
-
-/* Prompt */
-void print_prompt(void);
-
-/* Signal handling */
-void signal_handler(int sig);
-
-/* Command execution */
-int execute_command(char **args);
-
 #endif
