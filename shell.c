@@ -89,13 +89,13 @@ perror("fork");
 return (EXIT_FAILURE);
 }
 else if (pid == 0)
-{
 if (execve(line, argv, env_point) == -1)
 if (errno == ENOENT)
 printf("%s: command not found\n", line);
 {
 else if (errno == EACCES)
 printf("%s: permission denied\n", line);
+{
 else
 perror("execve");
 exit(EXIT_FAILURE);
