@@ -68,7 +68,6 @@ pid_t pid;
 char *argv[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
 execve("/bin/ls", argv, env_point);
-return (0);
 while (should_run)
 printf("simple_shell$ ");
 fflush(stdout);
@@ -85,8 +84,10 @@ return (EXIT_FAILURE);
 line[_strspn(line, "\n")] = '\0';
 pid = fork();
 if (pid < 0)
+{
 perror("fork");
 return (EXIT_FAILURE);
+}
 else if (pid == 0)
 {
 if (execve(line, argv, env_point) == -1)
