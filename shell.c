@@ -98,8 +98,7 @@ exit(EXIT_FAILURE);
 }
 else
 waitpid(pid, &status, WUNTRACED);
-{
-while (!WIFEXITED(status) && !WIFSIGNALED(status));
-}
-return 0;
+while
+(!WIFEXITED(status) && !WIFSIGNALED(status));
+return (0);
 }
