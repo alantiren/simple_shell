@@ -69,7 +69,7 @@ char *argv[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
 execve("/bin/ls", argv, env_point);
 while (should_run)
-printf("simple_shell$ ");
+printf("ourshell$ ");
 fflush(stdout);
 if (fgets(line, MAX_COMMAND_LENGTH, stdin) == NULL || feof(stdin))
 {
