@@ -95,11 +95,9 @@ printf("%s: command not found\n", line);
 {
 else if (errno == EACCES)
 printf("%s: permission denied\n", line);
-{
 else
 perror("execve");
 exit(EXIT_FAILURE);
-}
 else
 wait(NULL);
 }
