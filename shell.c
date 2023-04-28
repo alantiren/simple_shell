@@ -85,10 +85,8 @@ return (EXIT_FAILURE);
 line[_strspn(line, "\n")] = '\0';
 pid = fork();
 if (pid < 0)
-{
 perror("fork");
 return (EXIT_FAILURE);
-}
 else if (pid == 0)
 {
 if (execve(line, argv, env_point) == -1)
