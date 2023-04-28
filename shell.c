@@ -65,7 +65,7 @@ int shell_loop(void)
 int should_run = 1;
 char line[MAX_COMMAND_LENGTH];
 pid_t pid;
-char *argv[] = { "/bin/ls", "-l", NULL };
+char *argc[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
 execve("/bin/ls", argv, env_point);
 while (should_run)
@@ -73,7 +73,7 @@ printf("ourshell$ ");
 fflush(stdout);
 if (fgets(line, MAX_COMMAND_LENGTH, stdin) == NULL || feof(stdin))
 {
-printf("\n");
+printf("\n", input);
 return (EXIT_SUCCESS);
 }
 else
@@ -89,7 +89,7 @@ perror("fork");
 return (EXIT_FAILURE);
 }
 else if (pid == 0)
-if (execve(line, argv, env_point) == -1)
+if (execve(line, argc, env_point) == -1)
 if (errno == ENOENT)
 printf("%s: command not found\n", line);
 if (errno == EACCES)
