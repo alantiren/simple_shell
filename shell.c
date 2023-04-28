@@ -98,7 +98,7 @@ else
 perror("execve");
 exit(EXIT_FAILURE);
 {
-else
+if
 wait(NULL);
 }
 return (EXIT_SUCCESS);
