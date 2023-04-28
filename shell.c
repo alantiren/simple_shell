@@ -67,7 +67,7 @@ char line[MAX_COMMAND_LENGTH];
 pid_t pid = fork();
 char *args[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
-execve("/bin/ls", argc, env_point);
+execve("/bin/ls", argcs, env_point);
 while (should_run)
 printf("ourshell$ ");
 fflush(stdout);
@@ -89,7 +89,7 @@ perror("fork");
 return (EXIT_FAILURE);
 }
 else if (pid == 0)
-args[0] = input;
+args[0] = line;
 args[1] = NULL;
 if (execve(args[0], args, env_point) == -1)
 {
@@ -97,7 +97,7 @@ printf("%s: command not found\n", args[0]);
 exit(EXIT_FAILURE);
 }
 else
-waitpid(pid, &status, WUNTRACED);
+waitpid(pid, &stat, WUNTRACED);
 while
 (!WIFEXITED(status) && !WIFSIGNALED(status));
 return (0);
