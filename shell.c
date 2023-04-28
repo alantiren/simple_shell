@@ -91,7 +91,7 @@ return (EXIT_FAILURE);
 else if (pid == 0)
 args[0] = line;
 args[1] = NULL;
-if (execve(line, argc, env_point) == -1)
+if (execve(line, args, env_point) == -1)
 if (errno == ENOENT)
 printf("%s: command not found\n", line);
 if (errno == EACCES)
