@@ -67,7 +67,7 @@ char line[MAX_COMMAND_LENGTH];
 pid_t pid;
 char *argc[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
-execve("/bin/ls", argv, env_point);
+execve("/bin/ls", argc, env_point);
 while (should_run)
 printf("ourshell$ ");
 fflush(stdout);
