@@ -64,3 +64,38 @@ int _strncmp(const char *s1, const char *s2, size_t n);
 #define is_empty_string(s) ((s)[0] == '\0')
 
 #endif
+
+
+#ifndef SHELL_H
+#define SHELL_H
+
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+/**
+ * struct builtins - struct for the built-in functions
+ * @name: name of the built-in function
+ * @func: function pointer to the built-in function
+ */
+typedef struct builtins
+{
+	char *name;
+	void (*func)(char **);
+} builtins_t;
+
+/* main shell function */
+void shell_loop(void);
+
+/* utility functions */
+char *read_line(void);
+char **split_line(char *line);
+int execute(char **args);
+void handle_sigint(int sig);
+
+/* built-in functions */
+void shell_exit(char **args);
+
+#endif /* SHELL_H */

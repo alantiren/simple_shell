@@ -4,9 +4,7 @@
 #include "shell.h"
 
 #define UNUSED(x) (void)(x)
-#define MAX_COMMAND_LENGTH 100
-#define MAX_ARGUMENTS 10
-#define MAX_ARGUMENT_LENGTH 50
+
 
 /**
  * main - Entry point.
@@ -55,51 +53,74 @@ perror("Error, unable to allocate buffer\n");
 free(ln);
 exit(EXIT_SUCCESS);
 }
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <signal.h>
+
+#define UNUSED(x) (void)(x)
+
 /**
- * shell_loop - loop that repeatedly prompts the user.
- * Description: contains a loop
+ * main - Entry point.
+ * Description: Program to interpret and execute programs defined in the current directory.
+ * @argc: Number of Arguments.
+ * @argv: Array of arguments.
+ * @env_point: environment of the executed current program.
  * Return: (EXIT_SUCCESS) on success, (EXIT_FAILURE) on failure.
  */
-int shell_loop(void)
-{
-int should_run = 1;
-char line[MAX_COMMAND_LENGTH];
-pid_t pid = fork();
-char *args[] = { "/bin/ls", "-l", NULL };
-char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
-execve("/bin/ls", args, env_point);
-while (should_run)
-printf("ourshell$ ");
-fflush(stdout);
-if (fgets(line, MAX_COMMAND_LENGTH, stdin) == NULL || feof(stdin))
-{
-printf("\n");
-return (EXIT_SUCCESS);
-}
-else
-{
-perror("fgets");
-return (EXIT_FAILURE);
-}
-line[_strspn(line, "\n")] = '\0';
-pid = fork();
-if (pid < 0)
-{
-perror("fork");
-return (EXIT_FAILURE);
-}
-else if (pid == 0)
-args[0] = line;
-args[1] = NULL;
-if (execve(line, args, env_point) == -1)
-if (errno == ENOENT)
-printf("%s: command not found\n", line);
-if (errno == EACCES)
-printf("%s: permission denied\n", line);
-else
-perror("execve");
-exit(EXIT_FAILURE);
 
-wait(NULL);
-return (EXIT_SUCCESS);
+int main(int argc, char **argv, char **env_point)
+{
+    char *ln = NULL, *cmd = NULL;
+    size_t len = 0;
+    ssize_t rc;
+    signal(SIGINT, SIG_IGN);
+    UNUSED(argc);
+    UNUSED(argv);
+    while (1)
+    {
+        printf("cisfun$ ");
+        rc = getline(&ln, &len, stdin);
+        if (rc == EOF)
+        {
+            free(ln);
+            putchar('\n');
+            exit(EXIT_SUCCESS);
+        }
+        ln[strcspn(ln, "\n")] = '\0'; /* Remove newline character */
+        if (strcmp(ln, "exit") == 0)
+        {
+            free(ln);
+            putchar('\n');
+            exit(EXIT_SUCCESS);
+        }
+        cmd = strdup(ln);
+        if (cmd == NULL)
+        {
+            perror("Error");
+            free(ln);
+            continue;
+        }
+        if (fork() == 0)
+        {
+            if (execve(cmd, NULL, env_point) == -1)
+            {
+                perror("Error");
+                free(cmd);
+                exit(EXIT_FAILURE);
+            }
+        }
+        else
+        {
+            wait(NULL);
+            free(cmd);
+        }
+    }
+    free(ln);
+    return (EXIT_SUCCESS);
 }
+
+
