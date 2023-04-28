@@ -72,8 +72,9 @@ while (should_run)
 printf("ourshell$ ");
 fflush(stdout);
 if (fgets(line, MAX_COMMAND_LENGTH, stdin) == NULL || feof(stdin))
+line[_strspn(line, "\n")] = '\0';
 {
-printf("\n", input);
+printf("\n", line);
 return (EXIT_SUCCESS);
 }
 else
@@ -81,7 +82,6 @@ else
 perror("fgets");
 return (EXIT_FAILURE);
 }
-line[_strspn(line, "\n")] = '\0';
 pid = fork();
 if (pid < 0)
 {
