@@ -99,8 +99,7 @@ printf("%s: permission denied\n", line);
 else
 perror("execve");
 exit(EXIT_FAILURE);
-{
+
 wait(NULL);
-}
 return (EXIT_SUCCESS);
 }
