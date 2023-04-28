@@ -58,14 +58,14 @@ exit(EXIT_SUCCESS);
 /**
  * shell_loop - loop that repeatedly prompts the user.
  * Description: contains a loop
- * Return: (EXIT_SUCCESS) on success, (EXIT_FAILURE) on success.
+ * Return: (EXIT_SUCCESS) on success, (EXIT_FAILURE) on failure.
  */
 int shell_loop(void)
 {
 int should_run = 1;
 char line[MAX_COMMAND_LENGTH];
-pid_t pid;
-char *argc[] = { "/bin/ls", "-l", NULL };
+pid_t pid = fork();
+char *args[] = { "/bin/ls", "-l", NULL };
 char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
 execve("/bin/ls", argc, env_point);
 while (should_run)
@@ -89,16 +89,17 @@ perror("fork");
 return (EXIT_FAILURE);
 }
 else if (pid == 0)
-if (execve(line, argc, env_point) == -1)
-if (errno == ENOENT)
-printf("%s: command not found\n", line);
-if (errno == EACCES)
-printf("%s: permission denied\n", line);
-else
-perror("execve");
-exit(EXIT_FAILURE);
+args[0] = input;
+args[1] = NULL;
+if (execve(args[0], args, env_point) == -1)
 {
-wait(NULL);
+printf("%s: command not found\n", args[0]);
+exit(EXIT_FAILURE);
 }
-return (EXIT_SUCCESS);
+else
+waitpid(pid, &status, WUNTRACED);
+{
+while (!WIFEXITED(status) && !WIFSIGNALED(status));
+}
+return 0;
 }
