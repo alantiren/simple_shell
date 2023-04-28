@@ -91,14 +91,16 @@ return (EXIT_FAILURE);
 else if (pid == 0)
 args[0] = line;
 args[1] = NULL;
-if (execve(args[0], args, env_point) == -1)
-{
-printf("%s: command not found\n", args[0]);
-exit(EXIT_FAILURE);
-}
+if (execve(line, argc, env_point) == -1)
+if (errno == ENOENT)
+printf("%s: command not found\n", line);
+if (errno == EACCES)
+printf("%s: permission denied\n", line);
 else
-waitpid(pid, &wstatus, WUNTRACED);
-while
-(!WIFEXITED(wstatus) && !WIFSIGNALED(wstatus));
-return (0);
+perror("execve");
+exit(EXIT_FAILURE);
+{
+wait(NULL);
+}
+return (EXIT_SUCCESS);
 }
