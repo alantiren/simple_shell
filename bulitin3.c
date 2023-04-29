@@ -1,7 +1,6 @@
 #include "main.h"
-
 /**
- * get_builtin - Matches a command with a corresponding
+ * _builtin - Matches a command with a corresponding
  *               shellby builtin function.
  * @command: The command to match.
  *
@@ -28,9 +27,8 @@ int (*_builtin(char *command))(char **args, char **fronter)
 	}
 	return (funcs[i].f);
 }
-
 /**
- * shellie_exit - Causes normal process termination
+ * _exiter - Causes normal process termination
  *                for the shellby shell.
  * @args: An array of arguments containing the exit value.
  * @fronter: A double pointer to the beginning of args.
@@ -39,7 +37,8 @@ int (*_builtin(char *command))(char **args, char **fronter)
  *         If the given exit value is invalid - 2.
  *         O/w - exits with the given status value.
  *
- * Description: Upon returning -3, the program exits back in the main function.
+ * Description: Upon returning -3,
+ * the program exits back in the main function.
  */
 int _exiter(char **args, char **fronter)
 {
@@ -73,7 +72,6 @@ int _exiter(char **args, char **fronter)
 	f_alias_l(aliases);
 	exit(num);
 }
-
 /**
  * _cd_ - Changes the current directory of the shellby process.
  * @args: An array of arguments.
@@ -92,7 +90,6 @@ int _cd_(char **args, char __attribute__((__unused__)) **fro)
 	oldpwd = getcwd(oldpwd, 0);
 	if (!oldpwd)
 		return (-1);
-
 	if (args[0])
 	{
 		if (*(args[0]) == '-' || str_cmp(args[0], "--") == 0)
@@ -111,9 +108,9 @@ int _cd_(char **args, char __attribute__((__unused__)) **fro)
 		}
 		else
 		{
-			if (stat(args[0], &dir) == 0 && S_ISDIR(dir.st_mode)
-					&& ((dir.st_mode & S_IXUSR) != 0))
-				chdir(args[0]);
+			if (stat(args[0], &dir)
+					== 0 && S_ISDIR(dir.st_mode)
+					&& ((dir.st_mode & S_IXUSR) != 0)) chdir(args[0]);
 			else
 			{
 				free(oldpwd);
@@ -126,20 +123,16 @@ int _cd_(char **args, char __attribute__((__unused__)) **fro)
 		if (_genv_("HOME") != NULL)
 			chdir(*(_genv_("HOME")) + 5);
 	}
-
 	pwd = getcwd(pwd, 0);
 	if (!pwd)
 		return (-1);
-
 	dir_info = malloc(sizeof(char *) * 2);
 	if (!dir_info)
 		return (-1);
-
 	dir_info[0] = "OLDPWD";
 	dir_info[1] = oldpwd;
 	if (_setenv(dir_info, dir_info) == -1)
 		return (-1);
-
 	dir_info[0] = "PWD";
 	dir_info[1] = pwd;
 	if (_setenv(dir_info, dir_info) == -1)
@@ -154,7 +147,6 @@ int _cd_(char **args, char __attribute__((__unused__)) **fro)
 	free(dir_info);
 	return (0);
 }
-
 /**
  * _helper_ - Displays information about shellby builtin commands.
  * @args: An array of arguments.
@@ -183,6 +175,5 @@ int _helper_(char **args, char __attribute__((__unused__)) **fro)
 		shellie_help_help();
 	else
 		write(STDERR_FILENO, name, str_len(name));
-
 	return (0);
 }

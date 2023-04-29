@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- * shellie_help_all - Displays all possible builtin shellby commands.
+ * shellie_help_all - Displays all possible
+ * builtin shellby commands.
  */
 void shellie_help_all(void)
 {
@@ -23,7 +24,8 @@ void shellie_help_all(void)
 }
 
 /**
- * shellie_help_alias - Displays information on the shellby builtin command 'alias'.
+ * shellie_help_alias - Displays information on the shellby
+ * builtin command 'alias'.
  */
 void shellie_help_alias(void)
 {
@@ -45,7 +47,8 @@ void shellie_help_alias(void)
 }
 
 /**
- * shellie_help_cd - Displays information on the shellby builtin command 'cd'.
+ * shellie_help_cd - Displays information on the shellby
+ * builtin command 'cd'.
  */
 void shellie_help_cd(void)
 {
@@ -65,7 +68,8 @@ void shellie_help_cd(void)
 }
 
 /**
- * shellie_help_exit - Displays information on the shellby builtin command 'exit'.
+ * shellie_help_exit - Displays information on the shellby
+ * builtin command 'exit'.
  */
 void shellie_help_exit(void)
 {
@@ -81,7 +85,8 @@ void shellie_help_exit(void)
 }
 
 /**
- * shellie_help_help - Displays information on the shellby builtin command 'help'.
+ * shellie_help_help - Displays information on the shellby
+ * builtin command 'help'.
  */
 void shellie_help_help(void)
 {

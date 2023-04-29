@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- *shellie_ help_env - Displays information on the shellby builtin command 'env'.
+ * shellie_help_env - Displays information on the shellby builtin
+ * command 'env'
  */
 void shellie_help_env(void)
 {
@@ -11,7 +12,8 @@ void shellie_help_env(void)
 }
 
 /**
- * shellie_help_setenv - Displays information on the shellby builtin command 'setenv'.
+ * shellie_help_set_env - Displays information on the shellby builtin
+ * command 'setenv'.
  */
 void shellie_help_set_env(void)
 {
@@ -25,8 +27,8 @@ void shellie_help_set_env(void)
 }
 
 /**
- * shellie_help_unset_env - Displays information on the shellby builtin command
- * 'unsetenv'.
+ * shellie_help_unset_env - Displays information on the shellby builtin
+ * command 'unsetenv'.
  */
 void shellie_help_unset_env(void)
 {

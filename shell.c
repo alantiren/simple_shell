@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _shand_ - Prints a new prompt upon a signal.
  * @sig: The signal.
@@ -12,7 +11,6 @@ void _shand_(int sig)
 	signal(SIGINT, _shand_);
 	write(STDIN_FILENO, new_prompt, 3);
 }
-
 /**
  * _exec_ - Executes a command in a child process.
  * @args: An array of arguments.
@@ -32,7 +30,6 @@ int _exec_(char **args, char **fronter)
 		flag = 1;
 		command = g_loca(command);
 	}
-
 	if (!command || (access(command, F_OK) == -1))
 	{
 		if (errno == EACCES)
@@ -70,7 +67,6 @@ int _exec_(char **args, char **fronter)
 		free(command);
 	return (ret);
 }
-
 /**
  * main - Runs a simple UNIX command interpreter.
  * @argc: The number of arguments supplied to the program.
@@ -88,12 +84,10 @@ int main(int argc, char *argv[])
 	hist = 1;
 	aliases = NULL;
 	signal(SIGINT, _shand_);
-
 	*exe_ret = 0;
 	environ = _cenv_();
 	if (!environ)
 		exit(-100);
-
 	if (argc != 1)
 	{
 		ret = proces_f_comm(argv[1], exe_ret);
@@ -101,7 +95,6 @@ int main(int argc, char *argv[])
 		f_alias_l(aliases);
 		return (*exe_ret);
 	}
-
 	if (!isatty(STDIN_FILENO))
 	{
 		while (ret != END_OF_FILE && ret != EXIT)
@@ -110,7 +103,6 @@ int main(int argc, char *argv[])
 		f_alias_l(aliases);
 		return (*exe_ret);
 	}
-
 	while (1)
 	{
 		write(STDOUT_FILENO, prompt, 2);
@@ -124,7 +116,6 @@ int main(int argc, char *argv[])
 			exit(*exe_ret);
 		}
 	}
-
 	_fenv_();
 	f_alias_l(aliases);
 	return (*exe_ret);
