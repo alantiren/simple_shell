@@ -14,7 +14,6 @@ void _shand_(int sig)
 }
 
 /**
-<<<<<<< HEAD
  * _exec_ - Executes a command in a child process.
  * @args: An array of arguments.
  * @fronter: A double pointer to the beginning of args.
@@ -129,52 +128,4 @@ int main(int argc, char *argv[])
 	_fenv_();
 	f_alias_l(aliases);
 	return (*exe_ret);
-=======
- * shell_loop - loop that repeatedly prompts the user.
- * Description: contains a loop
- * Return: (EXIT_SUCCESS) on success, (EXIT_FAILURE) on failure.
- */
-int shell_loop(void)
-{
-int should_run = 1;
-char line[MAX_COMMAND_LENGTH];
-pid_t pid = fork();
-char *args[] = { "/bin/ls", "-l", NULL };
-char *env_point[] = { "PATH=/bin", "TERM=linux", NULL };
-execve("/bin/ls", args, env_point);
-while (should_run)
-printf("ourshell$ ");
-fflush(stdout);
-if (fgets(line, MAX_COMMAND_LENGTH, stdin) == NULL || feof(stdin))
-{
-printf("\n");
-return (EXIT_SUCCESS);
-}
-else
-{
-perror("fgets");
-return (EXIT_FAILURE);
-}
-line[_strspn(line, "\n")] = '\0';
-pid = fork();
-if (pid < 0)
-{
-perror("fork");
-return (EXIT_FAILURE);
-}
-else if (pid == 0)
-args[0] = line;
-args[1] = NULL;
-if (execve(line, args, env_point) == -1)
-if (errno == ENOENT)
-printf("%s: command not found\n", line);
-if (errno == EACCES)
-printf("%s: permission denied\n", line);
-else
-perror("execve");
-exit(EXIT_FAILURE);
-
-wait(NULL);
-return (EXIT_SUCCESS);
->>>>>>> 4bf6e3832441f55be486fd656a55c8ce33955f14
 }
