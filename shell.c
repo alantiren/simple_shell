@@ -25,6 +25,7 @@ int _exec_(char **args, char **fronter)
 	int status, flag = 0, ret = 0;
 	char *command = args[0];
 	if (command[0] != '/' && command[0] != '.')
+	
 	{
 		flag = 1;
 		command = g_loca(command);
@@ -74,6 +75,7 @@ int main(int argc, char *argv[])
 	int ret = 0, retn;
 	int *exe_ret = &retn;
 	char *prompt = "#$ ", *new_line = "\n";
+	
 	name = argv[0];
 	hist = 1;
 	aliases = NULL;
