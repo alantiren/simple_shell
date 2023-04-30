@@ -24,19 +24,16 @@ int _exec_(char **args, char **fronter)
 	pid_t child_pid;
 	int status, flag = 0, ret = 0;
 	char *command = args[0];
-
 	if (command[0] != '/' && command[0] != '.')
 	{
 		flag = 1;
 		command = g_loca(command);
 	}
 	if (!command || (access(command, F_OK) == -1))
-	{
 		if (errno == EACCES)
 			ret = (_c_error_(args, 126));
 		else
 			ret = (_c_error_(args, 127));
-	}
 	else
 	{
 		child_pid = fork();
@@ -58,10 +55,8 @@ int _exec_(char **args, char **fronter)
 			_exit(ret);
 		}
 		else
-		{
 			wait(&status);
 			ret = WEXITSTATUS(status);
-		}
 	}
 	if (flag)
 		free(command);
@@ -79,7 +74,6 @@ int main(int argc, char *argv[])
 	int ret = 0, retn;
 	int *exe_ret = &retn;
 	char *prompt = "#$ ", *new_line = "\n";
-
 	name = argv[0];
 	hist = 1;
 	aliases = NULL;
@@ -108,13 +102,11 @@ int main(int argc, char *argv[])
 		write(STDOUT_FILENO, prompt, 2);
 		ret = h_args(exe_ret);
 		if (ret == END_OF_FILE || ret == EXIT)
-		{
 			if (ret == END_OF_FILE)
 				write(STDOUT_FILENO, new_line, 1);
 			_fenv_();
 			f_alias_l(aliases);
 			exit(*exe_ret);
-		}
 	}
 	_fenv_();
 	f_alias_l(aliases);
